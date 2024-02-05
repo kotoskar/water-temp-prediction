@@ -1,14 +1,55 @@
-# График угла падения солнца, температуры воздуха и воды
-![](https://sun9-79.userapi.com/impg/L3JhUoHT-9B9bXvQro6iZ0ZbdyuhyhIyIOVR0w/IBSK4Xp8UKE.jpg?size=1280x356&quality=96&sign=278dcecad52498c402be931b5b9f1aff&type=album)
+## Общая информация
+***Проект предназначен для прогнозирования температуры воды Финского залива***
 
-# Визуализация подхода для прогнозирования
-![](https://sun9-75.userapi.com/impg/_DpIgl1dhIAEDFb8AS_kRZ9E8TUk7505ZjS57g/kYdhtnFFO8U.jpg?size=1693x526&quality=96&sign=3147faab36c60a21dd3764d40bc78d8a&type=album)
+### Структура данных о погоде, используемых для обучения моделей
+Осадки, температура воздуха, скорость и направление ветра, давление воздуха. Измерения каждые 3 часа.
+![](https://sun9-50.userapi.com/impg/NBwXbV1kGkHhoKns9DVlBmK9lmJJ6LjciFCvyw/EKA-OjYch9o.jpg?size=795x584&quality=96&sign=23bd63b39eb5fe9a7f0ff12fce9dce8c&type=album)
+Кроме того программно рассчитывается длительность солнечного дня и угол падения солнечных лучей.
 
-# Среднее абсолютное отклонение (MAE) линейной регрессии от количества учитываемых дней
+### Визуализация основного способа прогнозирования температуры
+![](https://sun9-78.userapi.com/impg/RWLvdRwemccK0Vps8MehWvVETvDVRC2FJfp4Rg/xdgyOR2rph8.jpg?size=1262x411&quality=96&sign=7f88974613095594f24b202c0b79908f&type=album)
+
+### Визуализация вторичного способа прогнозирования температуры
+![](https://sun9-77.userapi.com/impg/9g9JnR31YX-EYHuimkojStK_aunmC-oPCgyHyA/iVK6ofQGwb4.jpg?size=691x223&quality=96&sign=339d39b4dbf11a3b03dc0d7842a77e18&type=album)
+
+
+## Выбор и обучение модели
+### Проба различных моделей
+
+* Линейная регрессия без учёта предыдущих дней (прогнозирование температуры воды по погоде в этот же день):
+
+    MAE: 1.6782633008997887
+    MSE: 4.529998241978502
+    R2: 0.8898039175094071
+
+* Случайный лес:
+
+    MAE: 1.5048509619597805
+    MSE: 4.141491777669631
+    R2: 0.8976361507067828
+
+* Линейная регрессия с учётом 1 предыдущего дня:
+
+    MAE: 0.43523587023182014
+    MSE: 0.6236999922235447
+    R2: 0.9846276286666867
+
+* Случайный лес с учётом 1 предыдущего дня:
+
+    MAE: 0.48284969208449874
+    MSE: 0.5869214852655162
+    R2: 0.9856996540581264
+
+Лучшей моделью оказалась линейная регрессия, далее изучим сколько предыдущих дней оптимальнее всего учитывать.
+### Среднее абсолютное отклонение (MAE) линейной регрессии от количества учитываемых дней
 ![](https://sun9-37.userapi.com/impg/1-miFVz2KkBDC4gz6Q1_CYO4s5U3Vs3qkeamyw/LdoWDoInFEI.jpg?size=584x432&quality=96&sign=e0dd925ab423a2881350a5ac54cc292d&type=album)
 
-# Структура данных, используемых для обучения
-![](https://sun9-50.userapi.com/impg/NBwXbV1kGkHhoKns9DVlBmK9lmJJ6LjciFCvyw/EKA-OjYch9o.jpg?size=795x584&quality=96&sign=23bd63b39eb5fe9a7f0ff12fce9dce8c&type=album)
 
-# Первый результат работы
+
+### Первый результат работы
 ![](https://sun9-49.userapi.com/impg/zIkQ9v-amqZBeoD5Iq3pndw9avNIW8QuBV8cSg/HC3rg2suQtw.jpg?size=446x305&quality=96&sign=5ab9b9048ba59f1d3d55997d7848511f&type=album)
+
+## Прочее
+
+### График угла падения солнца, температуры воздуха и воды
+![](https://sun9-79.userapi.com/impg/L3JhUoHT-9B9bXvQro6iZ0ZbdyuhyhIyIOVR0w/IBSK4Xp8UKE.jpg?size=1280x356&quality=96&sign=278dcecad52498c402be931b5b9f1aff&type=album)

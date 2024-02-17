@@ -11,7 +11,26 @@
     />
   </head>
   <body>
-    <div class="container">
+    <div class="today">
+      <h1>Погода на сегодня ({{today}}):</h1>
+      <div class="weather">
+        <div class="air_temp">
+          <img
+            src="{% static 'interface/img/thermometer.svg' %}"
+            alt="Температура воздуха"
+          />
+          <h2>{{ air_temp }} ℃</h2>
+        </div>
+        <div class="water_temp">
+          <img
+            src="{% static 'interface/img/water.svg' %}"
+            alt="Температура воды"
+          />
+          <h2>{{ water_temp }} ℃</h2>
+        </div>
+      </div>
+    </div>
+    <div class="predictions">
       <div class="header">
         <h1>Прогноз температуры воды Финского залива на 14 дней:</h1>
       </div>
@@ -19,7 +38,13 @@
         {% for day, temp in predictions %}
         <div class="prediction">
           <div class="day">{{ day }}</div>
-          <div class="temp">{{ temp }}℃</div>
+          <div class="value">
+            <img
+              src="{% static 'interface/img/water.svg' %}"
+              alt="Температура воды"
+            />
+            <div class="temp">{{ temp }} ℃</div>
+          </div>
         </div>
         {% endfor %}
       </div>

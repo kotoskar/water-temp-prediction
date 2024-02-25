@@ -92,15 +92,15 @@ def weather(date):
     return cur_day_data
 
 def today_water_temp():
-    url = 'http://russia.pogoda360.ru/526529/water'
+    url = 'https://ru-meteo.com/temperatura-vody/morya/finskiy-zaliv'
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
         print(f'Error: {response.status_code}')
         return None
     
     soup = BeautifulSoup(response.text, 'html.parser')
-    water_block = soup.find('div', id='sstPanel')
-    water_temp = water_block.find('td', class_='temp').text.strip()[1:-2]
+    water_temp = soup.find('span', class_='bold').text[:-2]
+    
     if water_temp == '':
         print(f'Error: water temperature is not available')
         return None
@@ -152,6 +152,7 @@ def get_prediction_for_day(day, prev_temp):
     return predicted_temp[0]
 
 def main():
+    # print(today_water_temp())
     model = pickle.load(open(base_path + '\\models\\model.pkl', 'rb'))
     
     today = datetime.date.today()
